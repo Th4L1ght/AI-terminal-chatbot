@@ -33,34 +33,34 @@ def generate_commands(prompt):
         commands = result.stdout.strip().splitlines()
         return [cmd.strip() for cmd in commands if cmd.strip()]
     except FileNotFoundError:
-        print("❌ Ollama non trovato. Installa Ollama e il modello mistral.")
+        print(" Ollama non trovato. Installa Ollama e il modello mistral.")
         sys.exit(1)
 
 def main():
     os.system('clear')
-    print("🤖 AI Terminal Agent - modalità autonoma\n")
+    print(" AI Terminal Agent - modalità autonoma\n")
 
     prompt = input("🔎 Cosa vuoi che faccia il terminale? ").strip()
     if not prompt:
-        print("❌ Prompt vuoto.")
+        print(" Prompt vuoto.")
         return
 
-    print("\n🧠 Generazione comandi...")
+    print("\n Generazione comandi...")
     commands = generate_commands(prompt)
 
-    print("\n💡 Comandi generati:")
+    print("\n Comandi generati:")
     for cmd in commands:
-        print(f"👉 {cmd}")
+        print(f" {cmd}")
 
     log_command(prompt, commands)
 
-    print("\n🚀 Esecuzione automatica...\n")
+    print("\n Esecuzione automatica...\n")
     for cmd in commands:
-        print(f"➡️ {cmd}")
+        print(f"{cmd}")
         try:
             subprocess.run(cmd, shell=True, check=True)
         except subprocess.CalledProcessError as e:
-            print(f"❌ Errore nel comando: {cmd}\n{e}")
+            print(f"Errore nel comando: {cmd}\n{e}")
 
 if __name__ == "__main__":
     main()
